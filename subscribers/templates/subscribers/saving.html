@@ -1,0 +1,82 @@
+{% extends 'subscribers/base.html' %}
+
+{% block content %}
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+
+<section class="dashboard">
+
+    <div class="top">
+        <i class="uil uil-bars sidebar-toggle"></i>
+    </div>
+
+    <div class="dash-content"></div>
+    <div class="activity-data">
+        <div class="data names">
+            <h2 class="data-title" style="color: #0E4BF1;">Add Day Saving for {{ subscriber.full_name }}</h2>
+        </div>
+    </div>
+
+    <div class="activity-data">
+        <div class="data names">
+            <form method="post" action="" class="needs-validation" novalidate>
+                {% csrf_token %}
+                <div class="form-group">
+                    <label class="data-list">{{ form.january_date.label }}</label>
+                    {{ form.january_date }}
+                </div>
+                <div class="form-group">
+                    <label class="data-list">{{ form.february_date.label }}</label>
+                    {{ form.february_date }}
+                </div>
+                <div class="form-group">
+                    <label class="data-list">{{ form.march_date.label }}</label>
+                    {{ form.march_date }}
+                </div>
+                <div class="form-group">
+                    <label class="data-list">{{ form.april_date.label }}</label>
+                    {{ form.april_date }}
+                </div>
+                <div class="form-group">
+                    <label class="data-list">{{ form.may_date.label }}</label>
+                    {{ form.may_date }}
+                </div>
+                <div class="form-group">
+                    <label class="data-list">{{ form.june_date.label }}</label>
+                    {{ form.june_date }}
+                </div>
+                <div class="form-group">
+                    <label class="data-list">{{ form.july_date.label }}</label>
+                    {{ form.july_date }}
+                </div>
+                <div class="form-group">
+                    <label class="data-list">{{ form.august_date.label }}</label>
+                    {{ form.august_date }}
+                </div>
+                <div class="form-group">
+                    <label class="data-list">{{ form.september_date.label }}</label>
+                    {{ form.september_date }}
+                </div>
+                <div class="form-group">
+                    <label class="data-list">{{ form.october_date.label }}</label>
+                    {{ form.october_date }}
+                </div>
+                <div class="form-group">
+                    <label class="data-list">{{ form.november_date.label }}</label>
+                    {{ form.november_date }}
+                </div>
+                <div class="form-group">
+                    <label class="data-list">{{ form.december_date.label }}</label>
+                    {{ form.december_date }}
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
+    
+    
+</div>
+
+</section>
+
+{% endblock %}

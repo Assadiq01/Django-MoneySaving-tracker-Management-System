@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable= no">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <!----===== Iconscout CSS ===== -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <title>Document</title>
+</head>
+<body>
+
+    <nav>
+        <div class="logo-name">
+            <div class="logo-image">
+                <img src="images/logo.png" alt="">
+            </div>
+
+            <span class="logo_name" style="color: #0E4BF1;">Adashi</span>
+        </div>
+
+        <div class="menu-items">
+            <ul class="nav-links">
+                <li><a href="">
+                    <i class="uil uil-estate"></i>
+                    <span class="link-name">Dahsboard</span>
+                </a></li>
+                <li><a href="https://asdq-technology.github.io/assadiq_technology/" target="_blank">
+                    <i class="uil uil-files-landscapes"></i>
+                    <span class="link-name">Developer Info.</span>
+                </a></li>
+            </ul>
+            
+            <ul class="logout-mode">
+                <li><a href="{% url 'auth:user_logout' %}">
+                    <i class="uil uil-signout"></i>
+                    <span class="link-name">Logout</span>
+                </a></li>
+
+                <li class="mode">
+                    <a href="#">
+                        <i class="uil uil-moon"></i>
+                    <span class="link-name">Dark Mode</span>
+                </a>
+
+                <div class="mode-toggle">
+                  <span class="switch"></span>
+                </div>
+            </li>
+            </ul>
+        </div>
+    </nav>
+
+
+
+
+    {% block content %}
+    {% endblock %}
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

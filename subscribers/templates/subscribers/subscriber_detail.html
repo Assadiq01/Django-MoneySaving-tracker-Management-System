@@ -1,0 +1,288 @@
+{% extends 'subscribers/base.html' %}
+
+{% block content %}
+
+<style>
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        width: 100%;
+        border: 1px solid #ddd;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
+    /* Add custom CSS for horizontal list */
+    .month {
+        border: 1px solid #707070;
+        width: 100%;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        border-radius: 5px;
+        padding-left: 10px;
+    }
+    .horizontal-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .horizontal-list li {
+        display: inline-block;
+        margin-right: 10px; /* Adjust spacing between list items */
+        border: 1px solid #0E4BF1; /* Border style */
+        padding: 3px 6px; /* Padding inside each box */
+        background-color: #0E4BF1;
+        color: white;
+        border-radius: 5px;
+    }
+
+    .custom-btn {
+        background-color: #007bff; /* Change the background color */
+        color: #fff; /* Text color */
+        border: 1px solid #007bff; /* Border color */
+        border-radius: 5px; /* Border radius */
+        padding: 5px 10px; /* Padding */
+        text-decoration: none; /* Remove underline */
+        display: inline-block; /* Make it inline block */
+        transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    .custom-btn:hover {
+        background-color: #0056b3; /* Change background color on hover */
+        color: #fff; /* Change text color on hover */
+    }
+</style>
+
+<section class="dashboard">
+
+    <div class="top">
+        <i class="uil uil-bars sidebar-toggle"></i>
+    </div>
+    <div class="dash-content"></div>
+        <div class="overview">
+            <div class="title">
+                <span class="text"></span>
+            </div>
+        </div>
+
+        <div class="container mt-4">
+            <!-- Add additional profile information here -->
+            <div class="activity-data">
+                <div class="data names">
+                    <div style="overflow-x:auto;">
+                        <table class="table table-bordered mt-4">
+                            <tr>
+                                <th colspan="2" class="data-title">{{ subscriber.full_name }} Profile Details</th>
+                            </tr>
+                            <tr>
+                                <td class="data-list">Full Name</td>
+                                <td class="data-list">{{ subscriber.full_name }}</td>
+                            </tr>
+                            <tr>
+                                <td class="data-list">Email</td>
+                                <td class="data-list">{{ subscriber.email }}</td>
+                            </tr>
+                            <tr>
+                                <td class="data-list">Phone Number</td>
+                                <td class="data-list">{{ subscriber.phone_number }}</td>
+                            </tr>
+                            <tr>
+                                <td class="data-list">Address</td>
+                                <td class="data-list">{{ subscriber.address }}</td>
+                            </tr>
+                            <tr>
+                                <td class="data-list">Date of Register</td>
+                                <td class="data-list">{{ subscriber.date_of_register }}</td>
+                            </tr>
+                            <tr>
+                                <td class="data-list">Deposit Amount</td>
+                                <td class="data-list">{{ user.amount_deposited }} 
+                                    {% if messages %}
+                                        {% for message in messages %}
+                                            <p style="color: green;">{{ message }}</p>
+                                        {% endfor %}
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <a class="custom-btn" href="{% url 'subscribers:saving' subscriber.id %}">Add Date</a>
+                                    <a class="custom-btn" href="{% url 'auth:edit_user' user_id=user.id %}">Edit Amount</a>
+                                    <a class="custom-btn" href="{% url 'subscribers:subscriber_delete' pk=subscriber.pk %}">Delete Subscriber</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="activity-data" style="margin-top: 2rem;">
+                <div class="data names">
+                    <!-- January -->
+                    <div class="month">
+                        <h3 class="data-title">January</h3> 
+                        <ul class="horizontal-list">
+                            {% for day_saving in subscriber.daysaving_set.all %}
+                                {% if day_saving.january_date %}
+                                    <li class="data-list" style="color: white;">{{ day_saving.january_date|date:"d" }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                        <a class="custom-btn" href="{% url 'subscribers:delete_month_dates' subscriber_id=subscriber.id month=1 %}">Delete All</a>
+                    </div>
+
+                    <!-- February -->
+                    <div class="month">
+                        <h3 class="data-title">February</h3>
+                        <ul class="horizontal-list">
+                            {% for day_saving in subscriber.daysaving_set.all %}
+                                {% if day_saving.february_date %}
+                                    <li class="data-list" style="color: white;">{{ day_saving.february_date|date:"d" }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                        <a class="custom-btn" href="{% url 'subscribers:delete_month_dates' subscriber_id=subscriber.id month=2 %}">Delete All</a>
+                    </div>
+                    
+                    <!-- March -->
+                    <div class="month">
+                        <h3 class="data-title">March</h3>
+                        <ul class="horizontal-list">
+                            {% for day_saving in subscriber.daysaving_set.all %}
+                                {% if day_saving.march_date %}
+                                    <li class="data-list" style="color: white;">{{ day_saving.march_date|date:"d" }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                        <a class="custom-btn" href="{% url 'subscribers:delete_month_dates' subscriber_id=subscriber.id month=3 %}">Delete All</a>
+                    </div>
+                    
+                    <!-- April -->
+                    <div class="month">
+                        <h3 class="data-title">April</h3>
+                        <ul class="horizontal-list">
+                            {% for day_saving in subscriber.daysaving_set.all %}
+                                {% if day_saving.april_date %}
+                                    <li class="data-list" style="color: white;">{{ day_saving.april_date|date:"d" }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                        <a class="custom-btn" href="{% url 'subscribers:delete_month_dates' subscriber_id=subscriber.id month=4 %}">Delete All</a>
+                    </div> 
+
+                    <!-- May -->
+                    <div class="month">
+                        <h3 class="data-title">May</h3>
+                        <ul class="horizontal-list">
+                            {% for day_saving in subscriber.daysaving_set.all %}
+                                {% if day_saving.may_date %}
+                                    <li class="data-list" style="color: white;">{{ day_saving.may_date|date:"d" }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                        <a class="custom-btn" href="{% url 'subscribers:delete_month_dates' subscriber_id=subscriber.id month=5 %}">Delete All</a>
+                    </div> 
+
+                    <!-- June -->
+                    <div class="month">
+                        <h3 class="data-title">June</h3>
+                        <ul class="horizontal-list">
+                            {% for day_saving in subscriber.daysaving_set.all %}
+                                {% if day_saving.june_date %}
+                                    <li class="data-list" style="color: white;">{{ day_saving.june_date|date:"d" }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                        <a class="custom-btn" href="{% url 'subscribers:delete_month_dates' subscriber_id=subscriber.id month=6 %}">Delete All</a>
+                    </div>  
+
+                    <!-- July -->
+                    <div class="month">
+                        <h3 class="data-title">July</h3>
+                        <ul class="horizontal-list">
+                            {% for day_saving in subscriber.daysaving_set.all %}
+                                {% if day_saving.july_date %}
+                                    <li class="data-list" style="color: white;">{{ day_saving.july_date|date:"d" }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                        <a class="custom-btn" href="{% url 'subscribers:delete_month_dates' subscriber_id=subscriber.id month=7 %}">Delete All</a>
+                    </div>
+
+                    <!-- August -->
+                    <div class="month">
+                        <h3 class="data-title">August</h3>
+                        <ul class="horizontal-list">
+                            {% for day_saving in subscriber.daysaving_set.all %}
+                                {% if day_saving.august_date %}
+                                    <li class="data-list" style="color: white;">{{ day_saving.august_date|date:"d" }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                        <a class="custom-btn" href="{% url 'subscribers:delete_month_dates' subscriber_id=subscriber.id month=8 %}">Delete All</a>
+                    </div>  
+
+                    <!-- September -->
+                    <div class="month">
+                        <h3 class="data-title">September</h3>
+                        <ul class="horizontal-list">
+                            {% for day_saving in subscriber.daysaving_set.all %}
+                                {% if day_saving.september_date %}
+                                    <li class="data-list" style="color: white;">{{ day_saving.september_date|date:"d" }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                        <a class="custom-btn" href="{% url 'subscribers:delete_month_dates' subscriber_id=subscriber.id month=9 %}">Delete All</a>
+                    </div> 
+
+                    <!-- October -->
+                    <div class="month">
+                        <h3 class="data-title">October</h3>
+                        <ul class="horizontal-list">
+                            {% for day_saving in subscriber.daysaving_set.all %}
+                                {% if day_saving.october_date %}
+                                    <li class="data-list" style="color: white;">{{ day_saving.october_date|date:"d" }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                        <a class="custom-btn" href="{% url 'subscribers:delete_month_dates' subscriber_id=subscriber.id month=10 %}">Delete All</a>
+                    </div> 
+
+                    <!-- November -->
+                    <div class="month">
+                        <h3 class="data-title">November</h3>
+                        <ul class="horizontal-list">
+                            {% for day_saving in subscriber.daysaving_set.all %}
+                                {% if day_saving.november_date %}
+                                    <li class="data-list" style="color: white;">{{ day_saving.november_date|date:"d" }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                        <a class="custom-btn" href="{% url 'subscribers:delete_month_dates' subscriber_id=subscriber.id month=11 %}">Delete All</a>
+                    </div> 
+
+                    <!-- December -->
+                    <div class="month">
+                        <h3 class="data-title">December</h3>
+                        <ul class="horizontal-list">
+                            {% for day_saving in subscriber.daysaving_set.all %}
+                                {% if day_saving.december_date %}
+                                    <li class="data-list" style="color: white;">{{ day_saving.december_date|date:"d" }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                        <a class="custom-btn" href="{% url 'subscribers:delete_month_dates' subscriber_id=subscriber.id month=12 %}">Delete All</a>
+                    </div>                
+                </div>
+            </div>    
+        </div>
+    </div>
+</section>
+
+{% endblock %}

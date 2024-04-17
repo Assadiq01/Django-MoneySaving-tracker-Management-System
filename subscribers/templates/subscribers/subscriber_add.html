@@ -1,0 +1,12 @@
+<!-- subscribers/templates/subscribers/profile.html -->
+{% extends 'subscribers/base.html' %}
+
+{% block content %}
+<h1>Add Subscriber</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Subscriber</button>
+    </form>
+    <!-- Add additional profile information here -->
+{% endblock %}

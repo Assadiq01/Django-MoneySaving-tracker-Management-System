@@ -1,0 +1,63 @@
+{% extends 'subscribers/base.html' %}
+
+{% block content %}
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+
+<section class="dashboard">
+
+    <div class="top">
+        <i class="uil uil-bars sidebar-toggle"></i>
+    </div>
+
+    <div class="dash-content"></div>
+    <div class="activity-data">
+        <div class="data names">
+            <h2 class="data-title" style="color: #0E4BF1;">Edit User</h2>
+        </div>
+    </div>
+
+    <div class="activity-data">
+      <div class="data names">
+          {% if success_message %}
+              <p>{{ success_message }}</p>
+          {% endif %}
+  
+          <form method="post" action="{% url 'auth:edit_user' user.id %}" class="needs-validation" novalidate>
+              {% csrf_token %}
+              <div class="form-group">
+                  <label class="data-list">{{ edit_form.first_name.label }}</label>
+                  {{ edit_form.first_name }}
+              </div>
+              <div class="form-group">
+                  <label class="data-list">{{ edit_form.last_name.label }}</label>
+                  {{ edit_form.last_name }}
+              </div>
+              <div class="form-group">
+                  <label class="data-list">{{ edit_form.email.label }}</label>
+                  {{ edit_form.email }}
+              </div>
+              <div class="form-group">
+                  <label class="data-list">{{ edit_form.username.label }}</label>
+                  {{ edit_form.username }}
+              </div>
+              <div class="form-group">
+                <label class="data-list">{{ edit_form.amount_deposited.label }}</label>
+                {{ edit_form.amount_deposited }}
+            </div>
+              <div class="form-group">
+                  <label class="data-list">{{ edit_form.phone_number.label }}</label>
+                  {{ edit_form.phone_number }}
+              </div>
+              <button type="submit" class="btn btn-primary">Save Changes</button>
+          </form>
+      </div>
+  </div>
+  
+    
+    
+</div>
+
+</section>
+
+{% endblock %}

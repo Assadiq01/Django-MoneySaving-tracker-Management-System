@@ -1,0 +1,35 @@
+{% extends 'subscribers/base.html' %}
+
+{% block content %}
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+
+<section class="dashboard">
+
+    <div class="top">
+        <i class="uil uil-bars sidebar-toggle"></i>
+    </div>
+
+    <div class="dash-content"></div>
+    <div class="activity-data">
+        <div class="data names">
+            <h2 class="data-title" style="color: #0E4BF1;">Edit Saving Amount for {{ subscriber.full_name }}</h2>
+        </div>
+    </div>
+
+    <div class="activity-data">
+        <div class="data names">
+          <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Save Changes</button>
+        </form>
+        </div>
+    </div>
+    
+    
+</div>
+
+</section>
+
+{% endblock %}

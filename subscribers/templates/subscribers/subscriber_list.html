@@ -1,0 +1,55 @@
+{% extends 'subscribers/base.html' %}
+
+{% block content %}
+
+<section class="dashboard">
+    <div class="top">
+        <i class="uil uil-bars sidebar-toggle"></i>
+
+        <!-- Search Form -->
+        <form method="GET" action="{% url 'subscribers:subscriber_list' %}" class="search-box">
+            {% csrf_token %}
+            <i class="uil uil-search"></i>
+            <input type="text" name="q" placeholder="Search here..." value="{{ request.GET.q }}">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+        
+        <img src="images/profile.jpg" alt="">
+    </div>
+
+    <div class="dash-content"> 
+        <div class="activity">
+            <div class="title">
+                <i class="uil uil-clock-three"></i>
+                <span class="text">Subscriber List</span>
+            </div>
+
+            <div class="activity-data">
+                <div class="data names" style="width: 100%;">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="data-title">Full Name</th>
+                                <th scope="col" class="data-title">Phone number</th>
+                                <th scope="col" class="data-title">Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for subscriber in all_subscribers %}
+                                <tr>
+                                    <td class="data-list">{{ subscriber.full_name }}</td>
+                                    <td class="data-list">{{ subscriber.phone_number }}</td>
+                                    <td class="data-list">
+                                        <a  style="text-decoration: none;" href="{% url 'subscribers:subscriber_detail' pk=subscriber.pk %}" class="btn btn-primary">View Details</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

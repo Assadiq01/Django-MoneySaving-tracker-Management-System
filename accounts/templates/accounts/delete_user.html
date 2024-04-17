@@ -1,0 +1,16 @@
+
+{% block content %}
+  <h2>Delete User</h2>
+  
+  <p>Are you sure you want to delete the user "{{ user.username }}"?</p>
+  {% if success_message %}
+  <p style="color: green;">{{ success_message }}</p>
+    {% endif %}
+  <form method="post" action="">
+    {% csrf_token %}
+    <button type="submit">Yes, Delete User</button>
+    <a href="{% url 'auth:user_detail' user.id %}">Cancel</a>
+  </form>
+  
+ 
+{% endblock %}

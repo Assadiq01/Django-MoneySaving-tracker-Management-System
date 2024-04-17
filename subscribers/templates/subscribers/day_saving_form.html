@@ -1,0 +1,12 @@
+<!-- subscribers/templates/subscribers/day_saving_form.html -->
+{% extends 'subscribers/base.html' %}
+
+{% block content %}
+    <h2>Edit Day Saving</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+    <a href="{% url 'subscribers:subscriber_detail' pk=subscriber.id %}">Back to Profile</a>
+{% endblock %}
